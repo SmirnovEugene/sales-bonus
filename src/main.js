@@ -97,12 +97,11 @@ function analyzeSalesData(data, options) {
       // Увеличить общую накопленную прибыль (profit) у продавца
       seller.profit += profit;
       // Учёт количества проданных товаров
-      seller.products_sold[item.sku] += item.quantity;
       if (!seller.products_sold[item.sku]) {
         seller.products_sold[item.sku] = 0;
       }
-
       // По артикулу товара увеличить его проданное количество у продавца
+      seller.products_sold[item.sku] += item.quantity;
     });
   });
   // @TODO: Сортировка продавцов по прибыли
@@ -116,13 +115,18 @@ function analyzeSalesData(data, options) {
       .slice(0, 10);
   });
   // @TODO: Подготовка итоговой коллекции с нужными полями
-  return sellerStats.map((seller) => ({
-    seller_id: seller.id, // Строка, идентификатор продавца
-    name: seller.name, // Строка, имя продавца
-    revenue: +seller.revenue.toFixed(2), // Число с двумя знаками после точки, выручка продавца
-    profit: +seller.profit.toFixed(2), // Число с двумя знаками после точки, прибыль продавца
-    sales_count: seller.sales_count, // Целое число, количество продаж продавца
-    top_products: seller.top_products, // Массив объектов вида: { "sku": "SKU_008","quantity": 10}, топ-10 товаров продавца
-    bonus: +seller.bonus.toFixed(2), // Число с двумя знаками после точки, бонус продавца
-  }));
+  return sellerStats.map(
+    (seller) => (
+      console.log(seller.top_products),
+      {
+        seller_id: seller.id, // Строка, идентификатор продавца
+        name: seller.name, // Строка, имя продавца
+        revenue: +seller.revenue.toFixed(2), // Число с двумя знаками после точки, выручка продавца
+        profit: +seller.profit.toFixed(2), // Число с двумя знаками после точки, прибыль продавца
+        sales_count: seller.sales_count, // Целое число, количество продаж продавца
+        top_products: seller.top_products, // Массив объектов вида: { "sku": "SKU_008","quantity": 10}, топ-10 товаров продавца
+        bonus: +seller.bonus.toFixed(2), // Число с двумя знаками после точки, бонус продавца
+      }
+    )
+  );
 }
