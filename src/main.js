@@ -75,10 +75,12 @@ function analyzeSalesData(data, options) {
   }, {});
 
   // @TODO: Расчет выручки и прибыли для каждого продавца
+  if (data.purchase_records.length === 0) {
+    throw new Error("Чего-то не хватает");
+  }
   data.purchase_records.forEach((record) => {
     // Чек
     const seller = sellerIndex[record.seller_id]; // Продавец
-    if (!seller) return;
     // Увеличить количество продаж
     seller.sales_count += 1;
     // Увеличить общую сумму всех продаж
