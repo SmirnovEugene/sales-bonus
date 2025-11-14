@@ -1,5 +1,3 @@
-// const { lazy } = require("react");
-
 /**
  * Функция для расчета выручки
  * @param purchase запись о покупке
@@ -47,7 +45,7 @@ function analyzeSalesData(data, options) {
   }
   // @TODO: Проверка наличия опций
   const { calculateRevenue, calculateBonus } = options;
-  
+
   if (!calculateRevenue || !calculateBonus) {
     throw new Error("Чего-то не хватает");
   }
