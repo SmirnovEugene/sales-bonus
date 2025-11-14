@@ -97,7 +97,7 @@ function analyzeSalesData(data, options) {
       // Увеличить общую накопленную прибыль (profit) у продавца
       seller.profit += profit;
       // Учёт количества проданных товаров
-      seller.products_sold[item.sku] = item.quantity;
+      seller.products_sold[item.sku] += item.quantity;
       if (!seller.products_sold[item.sku]) {
         seller.products_sold[item.sku] = 0;
       }
